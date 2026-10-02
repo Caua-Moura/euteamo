@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5 Anos - Nosso Contrato</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ================= TEMA GERAL ================= */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #0a0a0a;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 {
+      font-family: 'Pacifico', cursive;
+      color: #ffffff;
+      text-shadow: 0 0 8px #ff0000, 0 0 15px #d00000, 0 0 25px #8b0000;
+      text-align: center;
+      margin: 20px 0;
+    }
+    section { padding: 40px 20px; border-bottom: 1px solid #330000; }
+
+    /* ================= TELA DE ABERTURA (INTRO) ================= */
+    #telaIntro {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: #0a0a0a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease;
+      padding: 20px;
+      text-align: center;
+    }
+    #telaIntro h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+    #telaIntro p {
+      color: #ffcccc;
+      margin-bottom: 30px;
+      font-size: 0.95rem;
+    }
+    .btn-intro {
+      background-color: #ff0000;
+      color: white;
+      border: none;
+      padding: 15px 35px;
+      font-size: 1.1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255,0,0,0.6);
+      transition: transform 0.2s;
+    }
+    .btn-intro:active { transform: scale(0.95); }
+
+    /* ================= SEÇÃO 1: HERO ================= */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      justify-content: center;
+    }
+    .polaroid-destaque {
+      background: white;
+      padding: 10px 10px 30px 10px;
+      border-radius: 4px;
+      box-shadow: 0 5px 20px rgba(255, 0, 0, 0.3);
+      margin-bottom: 25px;
+      transform: rotate(-2deg);
+    }
+    .polaroid-destaque img {
+      width: 250px;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    /* Player do Spotify */
+    .spotify-box {
+      width: 100%;
+      max-width: 320px;
+      margin-bottom: 25px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      border: 1px solid #333;
+    }
+
+    /* Contador */
+    .contador-box {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      text-align: center;
+    }
+    .unidade-tempo {
+      background: #1a0000;
+      border: 1px solid #ff0000;
+      padding: 10px;
+      border-radius: 8px;
+      min-width: 60px;
+      box-shadow: 0 0 10px rgba(255,0,0,0.2);
+    }
+    .unidade-tempo span {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+    }
+    .unidade-tempo p { font-size: 0.6rem; color: #ff9999; text-transform: uppercase; }
+
+    /* ================= RESTO DO SITE (OCULTO ATÉ OS 5 ANOS) ================= */
+    #conteudoRestante {
+      display: none; /* Fica totalmente escondido por padrão */
+    }
+
+    /* ================= SEÇÃO 2: CARROSSEL ================= */
+    .carrossel-wrapper {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .carrossel-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 20px;
+      padding: 20px 0;
+      width: 100%;
+      scroll-snap-type: x mandatory;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .carrossel-track::-webkit-scrollbar { display: none; }
+    
+    .polaroid {
+      flex: 0 0 200px;
+      scroll-snap-align: center;
+      background: white;
+      padding: 10px 10px 20px 10px;
+      border-radius: 4px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      color: #000;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .polaroid img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: #ccc;
+      margin-bottom: 10px;
+      pointer-events: none;
+    }
+    .seta {
+      background: rgba(255, 0, 0, 0.4);
+      border: 1px solid #ff0000;
+      color: #fff;
+      font-size: 1.5rem;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      position: absolute;
+      z-index: 10;
+    }
+    #prevBtn { left: -15px; }
+    #nextBtn { right: -15px; }
+
+    /* ================= SEÇÃO 3: A CARTA ================= */
+    .secao-carta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .carta-dobrada-container {
+      perspective: 1500px;
+      width: 100%;
+      max-width: 320px;
+      margin-top: 20px;
+      cursor: pointer;
+      position: relative;
+    }
+    .carta-fundo {
+      background-color: #fcf6eb;
+      border-radius: 5px;
+      min-height: 280px;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(255,0,0,0.1);
+      transform-style: preserve-3d;
+    }
+    .conteudo-carta {
+      padding: 30px 20px;
+      color: #333;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.5s ease 0.4s;
+    }
+    .saudacao { color: #d00000; text-shadow: none; font-size: 1.5rem; }
+    .aba-papel {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background-color: #fdf5e6;
+      border: 1px solid #e3d2b3;
+      backface-visibility: hidden;
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.05), 0 5px 10px rgba(0,0,0,0.3);
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10;
+    }
+    .aba-cima {
+      top: 0; transform-origin: top;
+      border-radius: 5px 5px 0 0;
+      display: flex; align-items: flex-end; justify-content: center;
+    }
+    .aba-baixo { bottom: 0; transform-origin: bottom; border-radius: 0 0 5px 5px; }
+    .selo-cera {
+      width: 60px; height: 60px;
+      background: radial-gradient(circle, #e60000 30%, #8b0000 90%);
+      border-radius: 50%;
+      margin-bottom: -30px;
+      box-shadow: inset 0px 0px 5px rgba(0,0,0,0.5), 0px 3px 6px rgba(0,0,0,0.4);
+      transition: opacity 0.4s ease, transform 0.6s ease;
+      z-index: 20;
+    }
+    .carta-aberta .aba-cima { transform: rotateX(180deg); }
+    .carta-aberta .aba-baixo { transform: rotateX(-180deg); }
+    .carta-aberta .selo-cera { opacity: 0; transform: scale(2) rotate(45deg); }
+    .carta-aberta .conteudo-carta { opacity: 1; }
+
+    /* ================= SEÇÃO 4: O PEDIDO ================= */
+    .secao-pedido img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 8px;
+      border: 2px solid #ff0000;
+      margin: 20px 0;
+    }
+    .frase-marcante {
+      font-style: italic;
+      color: #ffcccc;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    /* ================= SEÇÃO 5: CONTRATO ================= */
+    .secao-contrato {
+      text-align: center;
+      min-height: 50vh;
+      position: relative;
+    }
+    .botoes-contrato {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+    }
+    .btn {
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+    .btn-sim {
+      background-color: #ff0000;
+      color: white;
+      box-shadow: 0 0 15px rgba(255,0,0,0.6);
+      transition: transform 0.2s;
+    }
+    .btn-sim:active { transform: scale(0.9); }
+    .btn-nao {
+      background-color: #333;
+      color: white;
+      position: relative;
+      z-index: 50;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TELA DE INTRODUÇÃO -->
+  <div id="telaIntro">
+    <h2>Para o meu amor ❤️</h2>
+    <p>Preparei uma surpresa com nossa música. Toque no botão abaixo para abrir!</p>
+    <button class="btn-intro" onclick="entrarNoSite()">Entrar na Surpresa</button>
+  </div>
+
+  <!-- SEÇÃO 1: HERO (Sempre visível) -->
+  <section class="hero">
+    <h1>5 Anos com Você</h1>
+    
+    <div class="polaroid-destaque">
+      <img src="foto_casal.jpg.jpeg" alt="Nossa Foto">
+    </div>
+
+    <!-- PLAYER DO SPOTIFY -->
+    <div class="spotify-box">
+      <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3l8ACerUtJfRd0rxJJ4Gkx?utm_source=generator&theme=0&si=6a1a9c2d608b4e0c" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+
+    <div class="contador-box" id="contadorHTML"></div>
+  </section>
+
+  <!-- RESTANTE DO SITE (OCULTO ATÉ O DIA 31/10/2026) -->
+  <div id="conteudoRestante">
+
+    <!-- SEÇÃO 2: CARROSSEL -->
+    <section id="memorias">
+      <h2>Nossas Memórias</h2>
+      <div class="carrossel-wrapper">
+        <button class="seta" id="prevBtn">&#8249;</button>
+        <div class="carrossel-track" id="track">
+          <div class="polaroid"><img src="https://via.placeholder.com/200/222/fff?text=Foto+1">Momento 1</div>
+          <div class="polaroid"><img src="https://via.placeholder.com/200/333/fff?text=Foto+2">Momento 2</div>
+          <div class="polaroid"><img src="https://via.placeholder.com/200/444/fff?text=Foto+3">Momento 3</div>
+          <div class="polaroid"><img src="https://via.placeholder.com/200/555/fff?text=Foto+4">Momento 4</div>
+          <div class="polaroid"><img src="https://via.placeholder.com/200/666/fff?text=Foto+5">Momento 5</div>
+          <div class="polaroid"><img src="https://via.placeholder.com/200/777/fff?text=Foto+6">Momento 6</div>
+          <div class="polaroid"><img src="https://via.placeholder.com/200/888/fff?text=Foto+7">Momento 7</div>
+          <div class="polaroid"><img src="https://via.placeholder.com/200/999/fff?text=Foto+8">Momento 8</div>
+          <div class="polaroid"><img src="https://via.placeholder.com/200/aaa/fff?text=Foto+9">Momento 9</div>
+          <div class="polaroid"><img src="https://via.placeholder.com/200/bbb/fff?text=Foto+10">Momento 10</div>
+        </div>
+        <button class="seta" id="nextBtn">&#8250;</button>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3: CARTA -->
+    <section class="secao-carta">
+      <h2>Nossa História</h2>
+      <div class="carta-dobrada-container" id="cartaContainer" onclick="abrirCarta()">
+        <div class="carta-fundo">
+          <div class="conteudo-carta" id="conteudoCarta">
+            <h3 class="saudacao">Para a mulher da minha vida,</h3>
+            <p>[Sua carta escrita à mão entrará aqui!]</p>
+            <br>
+            <p>Você é meu melhor Sim. Te amo!</p>
+          </div>
+          <div class="aba-papel aba-cima" id="abaCima">
+            <div class="selo-cera" id="selo"></div>
+          </div>
+          <div class="aba-papel aba-baixo" id="abaBaixo"></div>
+        </div>
+      </div>
+      <p style="color:#aaa; font-size:0.8rem; margin-top:15px; font-style:italic;">Toque no selo para abrir</p>
+    </section>
+
+    <!-- SEÇÃO 4: O PEDIDO -->
+    <section class="secao-pedido" style="text-align: center;">
+      <h2>Onde Tudo Começou</h2>
+      <img src="https://via.placeholder.com/350x200/111/fff?text=Foto+do+Pedido" alt="Pedido">
+      <p class="frase-marcante">"O dia que eu tive a certeza que queria você para sempre."</p>
+    </section>
+
+    <!-- SEÇÃO 5: CONTRATO -->
+    <section class="secao-contrato">
+      <h2>Renovação</h2>
+      <p>Aceita renovar nossa assinatura para o resto da vida?</p>
+      <div class="botoes-contrato" id="containerBotoes">
+        <button class="btn btn-sim" onclick="celebrar()">SIM</button>
+        <button class="btn btn-nao" id="btnNao">NÃO</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // --- FUNÇÃO PARA ABRIR O SITE ---
+    function entrarNoSite() {
+      const intro = document.getElementById('telaIntro');
+      intro.style.opacity = '0';
+      setTimeout(() => {
+        intro.style.display = 'none';
+      }, 800);
+    }
+
+    // --- LÓGICA DO CONTADOR E LIBERAÇÃO DO SITE ---
+    const dataInicio = new Date("2021-10-31T00:00:00");
+    const dataAlvo5Anos = new Date("2026-10-31T00:00:00"); // Data exata dos 5 anos
+
+    function atualizarContador() {
+      const agora = new Date();
+      const diff = agora - dataInicio;
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diff / 1000 / 60) % 60);
+      const segundos = Math.floor((diff / 1000) % 60);
+      const anos = Math.floor(dias / 365);
+      const diasRestantes = dias % 365;
+
+      document.getElementById("contadorHTML").innerHTML = `
+        <div class="unidade-tempo"><span>${anos}</span><p>Anos</p></div>
+        <div class="unidade-tempo"><span>${diasRestantes}</span><p>Dias</p></div>
+        <div class="unidade-tempo"><span>${horas}</span><p>Horas</p></div>
+        <div class="unidade-tempo"><span>${minutos}</span><p>Min</p></div>
+        <div class="unidade-tempo"><span>${segundos}</span><p>Seg</p></div>
+      `;
+
+      // VERIFICA SE JÁ CHEGOU OU PASSOU DE 31/10/2026
+      if (agora >= dataAlvo5Anos) {
+        document.getElementById('conteudoRestante').style.display = 'block';
+      }
+    }
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+
+    // --- LÓGICA DO CARROSSEL ---
+    const track = document.getElementById('track');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let scrollAmount = 0;
+    let autoScroll;
+
+    function deslizar(direcao) {
+      const step = 220;
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      
+      if(direcao === 'dir') {
+        scrollAmount += step;
+        if(scrollAmount > maxScroll + 100) scrollAmount = 0;
+      } else {
+        scrollAmount -= step;
+        if(scrollAmount < 0) scrollAmount = maxScroll;
+      }
+      track.scrollTo({ top: 0, left: scrollAmount, behavior: 'smooth' });
+    }
+
+    function iniciarCarrossel() { autoScroll = setInterval(() => deslizar('dir'), 3500); }
+    function resetarTimer() { clearInterval(autoScroll); iniciarCarrossel(); }
+
+    nextBtn.addEventListener('click', () => { deslizar('dir'); resetarTimer(); });
+    prevBtn.addEventListener('click', () => { deslizar('esq'); resetarTimer(); });
+    
+    track.addEventListener('touchstart', () => clearInterval(autoScroll), { passive: true });
+    track.addEventListener('touchend', iniciarCarrossel, { passive: true });
+
+    iniciarCarrossel();
+
+    // --- LÓGICA DA CARTA ---
+    function abrirCarta() {
+      const container = document.getElementById('cartaContainer');
+      if (!container.classList.contains('carta-aberta')) {
+        container.classList.add('carta-aberta');
+      }
+    }
+
+    // --- LÓGICA DO BOTÃO FUJÃO ---
+    const btnNao = document.getElementById('btnNao');
+
+    function fugir(e) {
+      if(e) e.preventDefault();
+      
+      btnNao.style.position = 'absolute';
+      const maxX = window.innerWidth - btnNao.clientWidth - 40;
+      const maxY = 250; 
+      
+      const randomX = Math.floor(Math.random() * maxX) - (maxX/2);
+      const randomY = Math.floor(Math.random() * maxY) - 50;
+      
+      btnNao.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+
+    btnNao.addEventListener('mouseover', fugir);
+    btnNao.addEventListener('touchstart', fugir, { passive: false });
+
+    // --- LÓGICA DO BOTÃO SIM ---
+    function celebrar() {
+      alert("Ela disse SIM! (Aqui vai chover confete depois)");
+    }
+  </script>
+</body>
+</html>
